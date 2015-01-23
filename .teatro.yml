@@ -1,0 +1,11 @@
+stage:
+  before:
+    - DB=postgres bundle install
+    - cp config/diaspora.yml.example config/diaspora.yml
+    - DB=postgres bundle exec rake assets:precompile
+
+  run:
+    - DB=postgres bundle exec rails s
+
+  database:
+    - DB=postgres bundle exec rake db:create db:migrate
